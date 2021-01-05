@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ConverterActivity"
+    android:orientation="vertical">
+
+    <fragment
+        android:id="@+id/Data"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:name="smth.gmail.converterapp.DataFragment"/>
+    <fragment
+        android:id="@+id/Numpad"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:name="smth.gmail.converterapp.NumpadFragment"
+        android:layout_marginTop="75dp"/>
+
+</LinearLayout>
