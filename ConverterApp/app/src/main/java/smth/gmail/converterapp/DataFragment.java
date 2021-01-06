@@ -4,6 +4,13 @@ import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.os.Bundle;
+
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.LifecycleOwner;
+import androidx.lifecycle.ViewModel;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModelProviders;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,19 +21,14 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
-
-import smth.gmail.converterapp.ConverterViewModel;
-import smth.gmail.converterapp.R;
-
 public class DataFragment extends Fragment {
     ConverterViewModel converterViewModel;
+    View view;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         converterViewModel = new ViewModelProvider(requireActivity()).get(ConverterViewModel.class);
-        View view = inflater.inflate(R.layout.fragment_data, container, false);
+        view = inflater.inflate(R.layout.fragment_data, container, false);
 
         EditText edIn = view.findViewById(R.id.editText1);
         EditText edOut = view.findViewById(R.id.editText2);
@@ -34,7 +36,7 @@ public class DataFragment extends Fragment {
         SetSpinners(view, converterViewModel);
         converterViewModel.getInputData().observe(getViewLifecycleOwner(), value -> {edIn.setText(value);});
         converterViewModel.getOutputData().observe(getViewLifecycleOwner(), value -> {edOut.setText(value);});
-        setBtns(view, converterViewModel);
+
         return view;
     }
 
@@ -71,29 +73,5 @@ public class DataFragment extends Fragment {
 
         converterViewModel.getFromCat().observe(getViewLifecycleOwner(), value -> {spinnerIn.setSelection(converterViewModel.getMesNames(converterViewModel.GetCurrentCategory().getValue()).indexOf(value));});
         converterViewModel.getToCat().observe(getViewLifecycleOwner(), value -> {spinnerTo.setSelection(converterViewModel.getMesNames(converterViewModel.GetCurrentCategory().getValue()).indexOf(value));});
-    }
-
-    public void setBtns(View view, ConverterViewModel converterViewModel){
-        Button cop1 = view.findViewById(R.id.copy1);
-        Button cop2 = view.findViewById(R.id.copy2);
-        Button change = view.findViewById(R.id.change);
-
-        change.setOnClickListener(view1 -> {converterViewModel.setInputData(converterViewModel.getOutputData().getValue());});
-
-        cop1.setOnClickListener(view1 -> {
-            ClipboardManager clipboard = (ClipboardManager) requireActivity().getSystemService(Context.CLIPBOARD_SERVICE);
-            ClipData clip = ClipData.newPlainText("", converterViewModel.getInputData().getValue());
-            clipboard.setPrimaryClip(clip);
-            Toast toast = Toast.makeText(requireContext().getApplicationContext(), "Field1 Copied", Toast.LENGTH_LONG);
-            toast.show();
-        });
-
-        cop2.setOnClickListener(view1 -> {
-            ClipboardManager clipboard = (ClipboardManager) requireActivity().getSystemService(Context.CLIPBOARD_SERVICE);
-            ClipData clip = ClipData.newPlainText("", converterViewModel.getOutputData().getValue());
-            clipboard.setPrimaryClip(clip);
-            Toast toast = Toast.makeText(requireContext().getApplicationContext(), "Field2 Copied", Toast.LENGTH_LONG);
-            toast.show();
-        });
     }
 }
