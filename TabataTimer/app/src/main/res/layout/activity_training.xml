@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".TrainingActivity"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="15dp"
+        android:layout_margin="10dp"/>
+    
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/training_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="10dp"
+        android:layout_weight="70"/>
+
+    <LinearLayout
+        android:id="@+id/current"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_below="@id/training_list"
+        android:layout_marginBottom="15dp"
+        android:padding="10dp"
+        android:gravity="center">
+
+        <TextView
+            android:id="@+id/current_ex_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:padding="10dp"
+            android:layout_margin="7dp"
+            android:textSize="20sp"/>
+        <TextView
+            android:id="@+id/current_ex_time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="10dp"
+            android:layout_margin="7dp"
+            android:textSize="30sp"
+            android:text="@string/_0"
+            android:textAlignment="center"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_weight="1"
+        android:layout_below="@id/current"
+        android:layout_marginBottom="15dp"
+        android:padding="10dp">
+
+        <Button
+            android:id="@+id/start_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:layout_margin="10dp"
+            android:onClick="start_btn_clicked"
+            android:text="@string/start"/>
+
+        <Button
+            android:id="@+id/next_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:layout_margin="10dp"
+            android:text="@string/next_btn"
+            android:onClick="next_btn_clicked"/>
+
+        <Button
+            android:id="@+id/pause_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:layout_margin="10dp"
+            android:onClick="pause_btn_clicked"
+            android:text="@string/pause"/>
+
+
+    </LinearLayout>
+
+</LinearLayout>
